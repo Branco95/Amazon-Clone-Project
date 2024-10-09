@@ -80,6 +80,15 @@ document.querySelectorAll(".js-add-to-card").forEach((button) => {
       });
     }
 
-    console.log(cart);
+    let cartQuantities = 0;
+
+    cart.forEach((item) => {
+      cartQuantities += item.quantity;
+    });
+
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantities;
+
+    console.log(cartQuantities);
   });
 });
+w;
