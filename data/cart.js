@@ -1,4 +1,5 @@
 export let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let timeOutIds = {}; //object to store timeOutIds for each product
 
 export function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -21,6 +22,18 @@ export function addToCart(productId) {
       quantity: 1,
     });
   }
+
+  if (timeOutIds[productId]) {
+    clearTimeout(timeOutIds[productId]); //to clear the existant timeOut to re-run a new timeOut
+  }
+
+  document.querySelector(`.js-add-checkmark-${productId}`).style.opacity = "1";
+
+  timeOutIds[productId] = setTimeout(() => {
+    document.querySelector(`.js-add-checkmark-${productId}`).style.opacity =
+      "0";
+  }, 2000);
+
   saveToStorage();
 }
 

@@ -34,7 +34,7 @@ products.forEach((product) => {
           )}</div>
 
           <div class="product-quantity-container">
-            <select>
+            <select class="product-quantity">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>s
@@ -50,7 +50,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-add-checkmark-${product.id}">
             <img src="images/icons/checkmark.png" />
             Added
           </div>
@@ -67,7 +67,8 @@ document.querySelector(".js-products-grid").innerHTML = productsHTML;
 document.querySelectorAll(".js-add-to-card").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
-    console.log(productId);
+    const quantity = document.querySelector(".product-quantity").value;
+    console.log(quantity);
 
     addToCart(productId);
     updateCartQuantity();
