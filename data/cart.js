@@ -31,7 +31,23 @@ export function updateCartQuantity() {
     cartQuantities += cartItem.quantity;
   });
 
+  console.log(cartQuantities);
+
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantities;
+}
+
+export function updateCheckoutQuantity() {
+  let cartQuantities = 0;
+
+  cart.forEach((cartItem) => {
+    cartQuantities += cartItem.quantity;
+  });
+
+  console.log(cartQuantities);
+
+  document.querySelector(
+    ".js-checkout-quantity"
+  ).innerHTML = `${cartQuantities} items`;
 }
 
 export function removeFromCart(productId) {
