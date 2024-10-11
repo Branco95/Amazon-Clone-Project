@@ -32,7 +32,7 @@ export function addToCart(productId, newQuantity) {
     cart.push({
       productId,
       quantity: newQuantity,
-      deliveryOptionId : '1'
+      deliveryOptionId: "1",
     });
   }
 
@@ -88,4 +88,22 @@ export function removeFromCart(productId) {
   cart = newCart;
 
   saveToStorage();
+}
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+  let matchingItem;
+
+  cart.map((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
+
+  console.log(matchingItem);
+
+  matchingItem.deliveryOptionId = deliveryOptionId;
+
+  saveToStorage();
+
+  console.log(cart);
 }
