@@ -9,10 +9,6 @@ import {
 } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
-const today = dayjs();
-const deliveryDate = today.add(7, "days");
-console.log(deliveryDate.format("dddd, MMMM D"));
-
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
   updateCheckoutQuantity();
@@ -129,6 +125,7 @@ export function renderOrderSummary() {
 
       container.remove();
       updateCheckoutQuantity();
+      renderPaymentSummary();
     });
   });
 
