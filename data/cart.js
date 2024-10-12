@@ -1,3 +1,8 @@
+export let cart;
+let timeOutIds = {}; //object to store timeOutIds for each product
+
+loadFromStorage();
+
 export function getCartTotalQuantity() {
   let quantity = 0;
 
@@ -8,25 +13,28 @@ export function getCartTotalQuantity() {
   return quantity;
 }
 
-export let cart = JSON.parse(localStorage.getItem("cart")) || [
-  {
-    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-    quantity: 2,
-    deliveryOptionId: "1",
-  },
-  {
-    productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-    quantity: 2,
-    deliveryOptionId: "2",
-  },
-];
-let timeOutIds = {}; //object to store timeOutIds for each product
+export function loadFromStorage() {
+  cart = JSON.parse(localStorage.getItem("cart")) || [
+    {
+      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 2,
+      deliveryOptionId: "1",
+    },
+    {
+      productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+      quantity: 2,
+      deliveryOptionId: "2",
+    },
+  ];
+}
 
 export function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-export function addToCart(productId, newQuantity) {
+export function addToCart(productId, newQuantity = 1) {
+  console.log(productId);
+  console.log(newQuantity);
   let matchingItem;
   newQuantity = Number(newQuantity);
 
@@ -49,7 +57,7 @@ export function addToCart(productId, newQuantity) {
   if (timeOutIds[productId]) {
     clearTimeout(timeOutIds[productId]); //to clear the existant timeOut to re-run a new timeOut
   }
-
+  console.log("entrei");
   document.querySelector(`.js-add-checkmark-${productId}`).style.opacity = "1";
 
   timeOutIds[productId] = setTimeout(() => {
