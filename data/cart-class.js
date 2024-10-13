@@ -1,13 +1,13 @@
 class Cart {
   cartItems;
-  localStorage;
+  #localStorage;
 
   constructor(localStorage) {
-    this.localStorage = localStorage;
-    this.loadFromStorage();
+    this.#localStorage = localStorage;
+    this.#loadFromStorage();
   }
 
-  loadFromStorage() {
+  #loadFromStorage() {
     this.cartItems = JSON.parse(localStorage.getItem(this.localStorage)) || [
       {
         productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -120,4 +120,4 @@ class Cart {
   }
 }
 
-const cart = new Cart();
+const cart = new Cart("oop");
