@@ -35,7 +35,7 @@ export function saveToStorage() {
 export function addToCart(productId, newQuantity = 1) {
   console.log(productId);
   console.log(newQuantity);
-  let matchingItem;
+  let matchingItem; 
   newQuantity = Number(newQuantity);
 
   cart.forEach((cartItem) => {
