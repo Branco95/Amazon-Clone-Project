@@ -35,7 +35,7 @@ export function saveToStorage() {
 export function addToCart(productId, newQuantity = 1) {
   console.log(productId);
   console.log(newQuantity);
-  let matchingItem; 
+  let matchingItem;
   newQuantity = Number(newQuantity);
 
   cart.forEach((cartItem) => {
@@ -123,6 +123,16 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
   // matchingItem.deliveryOptionId = deliveryOptionId;
 
   saveToStorage();
+}
 
-  console.log(cart);
+export function loadCart(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    console.log(xhr.response);
+    fun();
+  });
+
+  xhr.open("GET", "https://supersimplebackend.dev/cart");
+  xhr.send();
 }
