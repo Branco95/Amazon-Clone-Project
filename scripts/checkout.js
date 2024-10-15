@@ -4,17 +4,32 @@ import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 // import "../data/cart-oop.js";
 
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
+async function loadPage() {
+  //await will wait that loadProductsFetch return his promise, to move one to the next line of this function
+  await loadProductsFetch();
+
+  const value = await new Promise((resolve) => {
     loadCart(() => {
       resolve();
     });
-  }),
-]).then(() => {
+  });
+
   renderOrderSummary();
   renderPaymentSummary();
-});
+}
+loadPage();
+
+// Promise.all([
+//   loadProductsFetch(),
+//   new Promise((resolve) => {
+//     loadCart(() => {
+//       resolve();
+//     });
+//   }),
+// ]).then(() => {
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
 
 // new Promise((resolve) => {
 //   console.log("start promise");
