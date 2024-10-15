@@ -11,13 +11,13 @@ async function loadPage() {
     //await will wait that loadProductsFetch return his promise, to move one to the next line of this function
     await loadProductsFetch();
 
-    const value = await new Promise((resolve, reject) => {
-      //throw 'error2'
-      loadCart(() => {
-        resolve();
-        //reject('error3')
-      });
-    });
+    // const value = await new Promise((resolve, reject) => {
+    //   //throw 'error2'
+    //   loadCart(() => {
+    //     resolve();
+    //     //reject('error3')
+    //   });
+    // });
   } catch (error) {
     console.log("Unexpected Error. Please try again later.");
   }
