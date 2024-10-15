@@ -15,11 +15,15 @@ export function loadProductsFetch() {
 
         return new Product(product);
       });
+    })
+    .catch((error) => {
+      console.log("Unexpected Error. Please try again later.");
     });
 
   return promise;
 }
 
+//This is a callback function
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
@@ -34,6 +38,11 @@ export function loadProducts(fun) {
     });
     // console.log(products);
     fun();
+  });
+
+  //if we get an error during the request we can handle an error message
+  xhr.addEventListener("error", (error) => {
+    console.log("Unexpected Error. Please try again later.");
   });
 
   xhr.open("GET", "https://supersimplebackend.dev/products");
