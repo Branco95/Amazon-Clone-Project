@@ -2,6 +2,44 @@ import { formatCurrency } from "../scripts/utils/money.js";
 
 export let products = [];
 
+export function loadProductsFetch() {
+  const promise = fetch("https://supersimplebackend.dev/products")
+    .then((response) => {
+      return response.json();
+    })
+    .then((productsData) => {
+      products = productsData.map((product) => {
+        if (product.type === "clothing") {
+          return new Clothing(product);
+        }
+
+        return new Product(product);
+      });
+    });
+
+  return promise;
+}
+
+export function loadProducts(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("load", () => {
+    console.log(xhr.response);
+    products = JSON.parse(xhr.response).map((product) => {
+      if (product.type === "clothing") {
+        return new Clothing(product);
+      }
+
+      return new Product(product);
+    });
+    // console.log(products);
+    fun();
+  });
+
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send();
+}
+
 export function getProduct(productId) {
   let matchingProduct;
 
@@ -85,26 +123,6 @@ console.log(tshirt.getPrice());
 //   keywords: ["socks", "sports", "apparel"],
 // });
 // console.log(product1);
-
-export function loadProducts(fun) {
-  const xhr = new XMLHttpRequest();
-
-  xhr.addEventListener("load", () => {
-    console.log(xhr.response);
-    products = JSON.parse(xhr.response).map((product) => {
-      if (product.type === "clothing") {
-        return new Clothing(product);
-      }
-
-      return new Product(product);
-    });
-    // console.log(products);
-    fun();
-  });
-
-  xhr.open("GET", "https://supersimplebackend.dev/products");
-  xhr.send();
-}
 
 // export const products = [
 //   {
