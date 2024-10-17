@@ -69,6 +69,19 @@ export function updateCartQuantity() {
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantities;
 }
 
+// export function updateCartQuantity(productID) {
+//   let cartQuantities = 0;
+
+//   cart.forEach((cartItem) => {
+//     if(cartItem.id)
+//     cartQuantities += cartItem.quantity;
+//   });
+
+//   console.log(cartQuantities);
+
+//   document.querySelector(".js-cart-quantity").innerHTML = cartQuantities;
+// }
+
 export function updateCheckoutQuantity() {
   let cartQuantities = 0;
 
