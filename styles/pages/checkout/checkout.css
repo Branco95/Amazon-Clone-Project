@@ -53,6 +53,21 @@
   margin-bottom: 12px;
 }
 
+.empty-cart-container {
+  display: flex;
+  /* border: 1px solid rgb(222, 222, 222); */
+  border-radius: 4px;
+  padding: 18px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  color: #a3a3c2;
+}
+
+.empty-cart-container {
+  margin-bottom: 12px;
+}
+
 .payment-summary {
   padding-bottom: 5px;
 }

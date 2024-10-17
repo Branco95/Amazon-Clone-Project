@@ -10,6 +10,13 @@ import { renderPaymentSummary } from "./paymentSummary.js";
 import { getDate } from "../utils/date.js";
 import { saveToStorage } from "../../data/cart.js";
 
+let emptyCart = "";
+emptyCart += `
+    <div class="empty-cart-container ">
+      - No items in your cart -
+    </div>
+    `;
+
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
   updateCheckoutQuantity();
@@ -107,7 +114,13 @@ export function renderOrderSummary() {
     return html;
   }
 
-  document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
+  // document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
+  if (cart.length === 0) {
+    console.log("cart is empty");
+    document.querySelector(".js-order-summary").innerHTML = emptyCart;
+  } else {
+    document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
+  }
 
   console.log(cartSummaryHTML);
 
@@ -124,6 +137,7 @@ export function renderOrderSummary() {
     container.remove();
     updateCheckoutQuantity();
     renderPaymentSummary();
+    renderOrderSummary();
   }
 
   document.querySelectorAll(".js-delete-link").forEach((link) => {
@@ -165,7 +179,7 @@ export function renderOrderSummary() {
         const number = oldSpan.innerText;
         let newSpan = document.createElement("input");
         newSpan.type = "number";
-        newSpan.min = 0;
+        newSpan.min = 1;
         newSpan.value = number;
         newSpan.className = `update-input js-update-input js-update-input-${productId}`;
         oldSpan.parentNode.replaceChild(newSpan, oldSpan);
